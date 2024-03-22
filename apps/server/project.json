@@ -24,5 +24,5 @@
       "command": "docker build -f apps/server/Dockerfile . -t server"
     }
   },
-  "tags": []
+  "tags": ["scope:server"]
 }

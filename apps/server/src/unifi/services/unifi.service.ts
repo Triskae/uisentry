@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { UnifiResponse } from '../models/unifi-response';
-import { Store } from '../enums/store.enum';
 import { lastValueFrom } from 'rxjs';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import {
   UnifiCartResponse,
   UnifiLimitationCode,
 } from '../models/unifi-cart-response';
+import { Region } from '@unifi-monitor/shared/interfaces';
 
 export const UNIFI_URL = 'https://ecomm.svc.ui.com/graphql';
 
@@ -15,7 +15,7 @@ export const UNIFI_URL = 'https://ecomm.svc.ui.com/graphql';
 export class UnifiService {
   constructor(private readonly httpService: HttpService) {}
 
-  async getAllUnifiProducts(store: Store): Promise<UnifiResponse | undefined> {
+  async getAllUnifiProducts(store: Region): Promise<UnifiResponse | undefined> {
     const requestBody = {
       operationName: 'GetProductsForLandingPagePro',
       variables: {
@@ -125,7 +125,7 @@ export class UnifiService {
             'Content-Type': 'application/json',
           },
           responseType: 'json',
-        }),
+        })
       );
       return a.data;
     } catch (error) {
@@ -134,8 +134,8 @@ export class UnifiService {
   }
 
   async getStockForProducts(
-    store: Store,
-    variants: string[],
+    store: Region,
+    variants: string[]
   ): Promise<UnifiCartResponse | undefined> {
     const requestBody = {
       operationName: 'ValidateCart',
@@ -160,7 +160,7 @@ export class UnifiService {
             'Content-Type': 'application/json',
           },
           responseType: 'json',
-        }),
+        })
       );
       return a.data;
     } catch (error) {
@@ -170,7 +170,7 @@ export class UnifiService {
 
   @Cron(CronExpression.EVERY_10_SECONDS)
   async checkForStock(): Promise<void> {
-    const allProducts = await this.getAllUnifiProducts(Store.Europe);
+    const allProducts = await this.getAllUnifiProducts(Region.Europe);
 
     const allVariantIds: string[] = [];
 
@@ -180,12 +180,12 @@ export class UnifiService {
 
     if (allVariantIds.length) {
       const allVariantsStock = await this.getStockForProducts(
-        Store.Europe,
-        allVariantIds,
+        Region.Europe,
+        allVariantIds
       );
       const error = allVariantsStock?.errors.find(
         (error) =>
-          error.extensions.code === UnifiLimitationCode.LIMITATION_ERROR,
+          error.extensions.code === UnifiLimitationCode.LIMITATION_ERROR
       );
       const stockQuantity =
         error?.extensions.limitationReasons[0].quantityAllowed;

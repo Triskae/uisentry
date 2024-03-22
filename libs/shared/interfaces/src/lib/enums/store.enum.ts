@@ -1,4 +1,4 @@
-export enum Store {
+export enum Region {
   Europe = 'eu',
   USA = 'us',
   UK = 'uk',

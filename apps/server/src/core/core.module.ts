@@ -7,7 +7,6 @@ import { DataConnectorModule } from '../data-connector/data-connector.module';
 @Global()
 @Module({
   imports: [
-    DataConnectorModule,
     ConfigModule.forRoot({
       ignoreEnvFile: process.env.NODE_ENV !== 'TEST',
       validationSchema: envVarsSchema,
