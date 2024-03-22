@@ -20,8 +20,8 @@ export function databaseBaseConfig(): DataSourceOptions {
     migrationsRun: true,
     migrationsTableName: 'ext_migration',
     migrations: useJs
-      ? ['dist/data-connector/migrations/**/*.js']
-      : ['src/data-connector/migrations/**/*.ts'],
+      ? ['dist/apps/server/data-connector/migrations/**/*.js']
+      : ['apps/server/src/data-connector/migrations/**/*.ts'],
     installExtensions: true,
     namingStrategy: new SnakeNamingStrategy(),
   };

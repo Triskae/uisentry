@@ -1,9 +1,8 @@
 import { RootEntity } from './root.entity';
 import { Column, Index, Unique } from 'typeorm';
 
-@Unique(['unifi_id'])
+@Index(['unifiId'], { unique: true })
 export class UnifiEntity extends RootEntity {
-  @Index('unifi_idx')
-  @Column({ unique: true })
+  @Column()
   unifiId: string;
 }

@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "typeorm": "set DOTENV_CONFIG_PATH=.env && pnpm run  ts-node -r tsconfig-paths/register -r dotenv/config ./node_modules/typeorm/cli.js",
-    "migration:generate": "set DOTENV_CONFIG_PATH=.env && pnpm ts-node -r tsconfig-paths/register -r dotenv/config ./node_modules/typeorm/cli.js migration:generate -d src/core/config/database-migration-config.ts",
-    "migration:run": "pnpm run typeorm migration:run -d apps/server/src/data-connector/config/database-migration-config.ts",
-    "migration:create": "pnpm run typeorm migration:create",
-    "resetDB": "pnpm run typeorm schema:drop -d apps/server/src/data-connector/config/database-migration-config.ts && pnpm run migration:run && pnpm build",
-    "resetDB:noBuild": "pnpm run typeorm schema:drop -d apps/server/src/data-connector/config/database-migration-config.ts && pnpm run run typeorm migration:run",
-    "resetDB:debug": "pnpm run typeorm schema:drop -d apps/server/src/data-connector/config/database-migration-config.ts && pnpm run run typeorm migration:run && pnpm run build && pnpm run start:debug"
+    "typeorm": "set DOTENV_CONFIG_PATH=/Users/filipe/Documents/Dev/Perso/unifi-monitor/apps/server/.env && yarn ts-node --project apps/server/tsconfig.app.json -r tsconfig-paths/register -r dotenv/config ./node_modules/typeorm/cli.js",
+    "migration:generate": "yarn typeorm migration:generate -d apps/server/src/data-connector/config/database-migration-config.ts",
+    "migration:run": "yarn typeorm migration:run -d apps/server/src/data-connector/config/database-migration-config.ts",
+    "migration:create": "yarn typeorm migration:create",
+    "resetDB": "yarn typeorm schema:drop -d apps/server/src/data-connector/config/database-migration-config.ts && pnpm run migration:run && pnpm build",
+    "resetDB:noBuild": "yarn typeorm schema:drop -d apps/server/src/data-connector/config/database-migration-config.ts && yarn run typeorm migration:run",
+    "resetDB:debug": "yarn typeorm schema:drop -d apps/server/src/data-connector/config/database-migration-config.ts && yarn run typeorm migration:run && yarn build && yarn start:debug"
   },
   "private": true,
   "dependencies": {
