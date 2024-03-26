@@ -69,7 +69,7 @@ export interface UnifiVariant {
 
 export enum UnifiStatus {
   Available = 'Available',
-  SoldOut = 'SoldOut',
+  SoldOut = 'SoldOut'
 }
 
 export interface UnifiMoney {

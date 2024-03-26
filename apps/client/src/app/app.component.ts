@@ -1,14 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent, RouterModule],
-  selector: 'app-root',
+  imports: [RouterModule],
+  selector: 'uis-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'client';
+
+  ngOnInit(): void {
+    initFlowbite();
+  }
 }

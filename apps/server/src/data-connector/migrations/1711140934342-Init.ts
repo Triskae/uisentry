@@ -1,5 +1,4 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
-import { query } from '@angular/animations';
 
 export class Init1711140934342 implements MigrationInterface {
   name = 'Init1711140934342';
@@ -22,15 +21,9 @@ export class Init1711140934342 implements MigrationInterface {
                                "short_description"              character varying        NOT NULL,
                                CONSTRAINT "PK_bebc9158e480b949565b4dc7a82" PRIMARY KEY ("id")
                              )`);
-    await queryRunner.query(
-      `CREATE UNIQUE INDEX "IDX_ce5a7c4b25a3abdf1ad2ab82aa" ON "unifi"."product" ("unifi_id") `
-    );
-    await queryRunner.query(
-      `CREATE TYPE "unifi"."variant_status_enum" AS ENUM('Available', 'SoldOut')`
-    );
-    await queryRunner.query(
-      `CREATE TYPE "unifi"."variant_region_enum" AS ENUM('eu', 'us', 'uk')`
-    );
+    await queryRunner.query(`CREATE UNIQUE INDEX "IDX_ce5a7c4b25a3abdf1ad2ab82aa" ON "unifi"."product" ("unifi_id") `);
+    await queryRunner.query(`CREATE TYPE "unifi"."variant_status_enum" AS ENUM('Available', 'SoldOut')`);
+    await queryRunner.query(`CREATE TYPE "unifi"."variant_region_enum" AS ENUM('eu', 'us', 'uk')`);
     await queryRunner.query(`CREATE TABLE "unifi"."variant"
                              (
                                "id"         SERIAL                        NOT NULL,
@@ -48,9 +41,7 @@ export class Init1711140934342 implements MigrationInterface {
                                "product_id" integer                       NOT NULL,
                                CONSTRAINT "PK_f8043a8a34fa021a727a4718470" PRIMARY KEY ("id")
                              )`);
-    await queryRunner.query(
-      `CREATE UNIQUE INDEX "IDX_f9e23b1104919327431fb704e7" ON "unifi"."variant" ("unifi_id") `
-    );
+    await queryRunner.query(`CREATE UNIQUE INDEX "IDX_f9e23b1104919327431fb704e7" ON "unifi"."variant" ("unifi_id") `);
     await queryRunner.query(`CREATE TABLE "unifi"."gallery_item"
                              (
                                "id"         SERIAL                   NOT NULL,
@@ -79,19 +70,13 @@ export class Init1711140934342 implements MigrationInterface {
       DROP CONSTRAINT "FK_dc5cf059b1b48bad23c7efa881b"`);
     await queryRunner.query(`ALTER TABLE "unifi"."variant"
       DROP CONSTRAINT "FK_738bfa62f918ad1436cb5c8ee5b"`);
-    await queryRunner.query(
-      `DROP INDEX "unifi"."IDX_b205867ba88fae6c87a47b045f"`
-    );
+    await queryRunner.query(`DROP INDEX "unifi"."IDX_b205867ba88fae6c87a47b045f"`);
     await queryRunner.query(`DROP TABLE "unifi"."gallery_item"`);
-    await queryRunner.query(
-      `DROP INDEX "unifi"."IDX_f9e23b1104919327431fb704e7"`
-    );
+    await queryRunner.query(`DROP INDEX "unifi"."IDX_f9e23b1104919327431fb704e7"`);
     await queryRunner.query(`DROP TABLE "unifi"."variant"`);
     await queryRunner.query(`DROP TYPE "unifi"."variant_region_enum"`);
     await queryRunner.query(`DROP TYPE "unifi"."variant_status_enum"`);
-    await queryRunner.query(
-      `DROP INDEX "unifi"."IDX_ce5a7c4b25a3abdf1ad2ab82aa"`
-    );
+    await queryRunner.query(`DROP INDEX "unifi"."IDX_ce5a7c4b25a3abdf1ad2ab82aa"`);
     await queryRunner.query(`DROP TABLE "unifi"."product"`);
   }
 }

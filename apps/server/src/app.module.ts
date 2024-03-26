@@ -8,14 +8,8 @@ import { NotificationModule } from './notification/notification.module';
 import { DataConnectorModule } from './data-connector/data-connector.module';
 
 @Module({
-  imports: [
-    CoreModule,
-    ScheduleModule.forRoot(),
-    DataConnectorModule,
-    UnifiModule,
-    NotificationModule,
-  ],
+  imports: [CoreModule, ScheduleModule.forRoot(), DataConnectorModule, UnifiModule, NotificationModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
 export class AppModule {}

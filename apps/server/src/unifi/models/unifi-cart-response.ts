@@ -14,7 +14,7 @@ export interface UnifiExtensions {
 }
 
 export enum UnifiLimitationCode {
-  LIMITATION_ERROR = 'LIMITATION_ERROR',
+  LIMITATION_ERROR = 'LIMITATION_ERROR'
 }
 
 export interface LimitationReasons {

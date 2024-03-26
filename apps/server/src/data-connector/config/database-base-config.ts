@@ -13,9 +13,7 @@ export function databaseBaseConfig(): DataSourceOptions {
     database: process.env.DATABASE_NAME,
     username: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASSWORD,
-    entities: useJs
-      ? ['dist/**/*.entity.js']
-      : ['apps/server/src/**/*.entity.ts'],
+    entities: useJs ? ['dist/**/*.entity.js'] : ['apps/server/src/**/*.entity.ts'],
     synchronize: false,
     migrationsRun: true,
     migrationsTableName: 'ext_migration',
@@ -23,13 +21,13 @@ export function databaseBaseConfig(): DataSourceOptions {
       ? ['dist/apps/server/data-connector/migrations/**/*.js']
       : ['apps/server/src/data-connector/migrations/**/*.ts'],
     installExtensions: true,
-    namingStrategy: new SnakeNamingStrategy(),
+    namingStrategy: new SnakeNamingStrategy()
   };
 }
 
 export function dbTOConfig(): TypeOrmModuleOptions {
   return {
     ...databaseBaseConfig(),
-    keepConnectionAlive: true,
+    keepConnectionAlive: true
   };
 }

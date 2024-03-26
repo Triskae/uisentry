@@ -12,7 +12,7 @@ export enum EnvVars {
   TIMEZONE = 'TIMEZONE',
   TELEGRAM_BOT_TOKEN = 'TELEGRAM_BOT_TOKEN',
   TELEGRAM_CHAT_ID = 'TELEGRAM_CHAT_ID',
-  HTTP_TIMEOUT_MS = 'HTTP_TIMEOUT_MS',
+  HTTP_TIMEOUT_MS = 'HTTP_TIMEOUT_MS'
 }
 
 const rawSchema = {
@@ -27,9 +27,9 @@ const rawSchema = {
   [EnvVars.TIMEZONE]: Joi.string().required(),
   [EnvVars.TELEGRAM_BOT_TOKEN]: Joi.string(),
   [EnvVars.TELEGRAM_CHAT_ID]: Joi.string(),
-  [EnvVars.HTTP_TIMEOUT_MS]: Joi.number().default(5000),
+  [EnvVars.HTTP_TIMEOUT_MS]: Joi.number().default(5000)
 };
 
 export const envVarsSchema: Joi.ObjectSchema = Joi.object(rawSchema).options({
-  stripUnknown: true,
+  stripUnknown: true
 });

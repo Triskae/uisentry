@@ -4,7 +4,7 @@ export abstract class NotificationProvider<T> {
 
   protected constructor(
     protected config: T,
-    type: NotificationProviderType,
+    type: NotificationProviderType
   ) {
     this.providerConfig = config;
     this.type = type;
@@ -15,5 +15,5 @@ export abstract class NotificationProvider<T> {
 
 export enum NotificationProviderType {
   TELEGRAM = 'telegram',
-  SIGNAL = 'signal',
+  SIGNAL = 'signal'
 }

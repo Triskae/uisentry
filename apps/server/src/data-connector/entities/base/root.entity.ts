@@ -1,11 +1,5 @@
 import { IBaseEntity } from '@unifi-monitor/shared/interfaces';
-import {
-  BaseEntity,
-  CreateDateColumn,
-  DeleteDateColumn,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { BaseEntity, CreateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { Exclude } from 'class-transformer';
 
 export class RootEntity extends BaseEntity implements IBaseEntity {
@@ -16,7 +10,7 @@ export class RootEntity extends BaseEntity implements IBaseEntity {
   @CreateDateColumn({
     type: 'timestamptz',
     nullable: false,
-    name: 'created_at',
+    name: 'created_at'
   })
   createdAt: Date;
 
@@ -24,7 +18,7 @@ export class RootEntity extends BaseEntity implements IBaseEntity {
   @UpdateDateColumn({
     type: 'timestamptz',
     nullable: true,
-    name: 'updated_at',
+    name: 'updated_at'
   })
   updatedAt: Date;
 
@@ -32,7 +26,7 @@ export class RootEntity extends BaseEntity implements IBaseEntity {
   @DeleteDateColumn({
     type: 'timestamp',
     name: 'deleted_at',
-    nullable: true,
+    nullable: true
   })
   deletedAt: Date;
 }

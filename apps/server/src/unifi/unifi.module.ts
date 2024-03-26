@@ -6,6 +6,6 @@ import { ConfigService } from '@nestjs/config';
 @Module({
   imports: [HttpModule],
   providers: [UnifiService, ConfigService],
-  exports: [UnifiService],
+  exports: [UnifiService]
 })
 export class UnifiModule {}

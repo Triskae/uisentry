@@ -19,9 +19,9 @@ import { GalleryItem } from './entities/unifi/gallery-item.entity';
         }
 
         return addTransactionalDataSource(new DataSource(databaseBaseConfig()));
-      },
+      }
     }),
-    TypeOrmModule.forFeature([Variant, Product, GalleryItem]),
-  ],
+    TypeOrmModule.forFeature([Variant, Product, GalleryItem])
+  ]
 })
 export class DataConnectorModule {}

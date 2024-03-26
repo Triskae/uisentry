@@ -3,10 +3,7 @@ import { HttpService } from '@nestjs/axios';
 import { UnifiResponse } from '../models/unifi-response';
 import { lastValueFrom } from 'rxjs';
 import { Cron, CronExpression } from '@nestjs/schedule';
-import {
-  UnifiCartResponse,
-  UnifiLimitationCode,
-} from '../models/unifi-cart-response';
+import { UnifiCartResponse, UnifiLimitationCode } from '../models/unifi-cart-response';
 import { Region } from '@unifi-monitor/shared/interfaces';
 
 export const UNIFI_URL = 'https://ecomm.svc.ui.com/graphql';
@@ -25,9 +22,9 @@ export class UnifiService {
           filter: {
             storeId: store,
             language: 'en',
-            line: 'Unifi',
-          },
-        },
+            line: 'Unifi'
+          }
+        }
       },
       query: `query GetProductsForLandingPagePro($input: StorefrontProductListInput!) {
       storefrontProducts(input: $input) {
@@ -115,16 +112,16 @@ export class UnifiService {
       amount
       currency
       __typename
-    }`,
+    }`
     };
 
     try {
       const a = await lastValueFrom(
         this.httpService.post<UnifiResponse>(UNIFI_URL, requestBody, {
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
           },
-          responseType: 'json',
+          responseType: 'json'
         })
       );
       return a.data;
@@ -133,10 +130,7 @@ export class UnifiService {
     }
   }
 
-  async getStockForProducts(
-    store: Region,
-    variants: string[]
-  ): Promise<UnifiCartResponse | undefined> {
+  async getStockForProducts(store: Region, variants: string[]): Promise<UnifiCartResponse | undefined> {
     const requestBody = {
       operationName: 'ValidateCart',
       variables: {
@@ -145,21 +139,21 @@ export class UnifiService {
           ...variants.map((id) => {
             return {
               storeProductVariantId: id,
-              quantity: 100000,
+              quantity: 100000
             };
-          }),
-        ],
+          })
+        ]
       },
-      query: `query ValidateCart($storeId: StoreId!, $items: [CartItem!]!, $checkoutId: UUID) {  validateCart(storeId: $storeId, items: $items, checkoutId: $checkoutId)}`,
+      query: `query ValidateCart($storeId: StoreId!, $items: [CartItem!]!, $checkoutId: UUID) {  validateCart(storeId: $storeId, items: $items, checkoutId: $checkoutId)}`
     };
 
     try {
       const a = await lastValueFrom(
         this.httpService.post<UnifiCartResponse>(UNIFI_URL, requestBody, {
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
           },
-          responseType: 'json',
+          responseType: 'json'
         })
       );
       return a.data;
@@ -179,16 +173,11 @@ export class UnifiService {
     }
 
     if (allVariantIds.length) {
-      const allVariantsStock = await this.getStockForProducts(
-        Region.Europe,
-        allVariantIds
-      );
+      const allVariantsStock = await this.getStockForProducts(Region.Europe, allVariantIds);
       const error = allVariantsStock?.errors.find(
-        (error) =>
-          error.extensions.code === UnifiLimitationCode.LIMITATION_ERROR
+        (error) => error.extensions.code === UnifiLimitationCode.LIMITATION_ERROR
       );
-      const stockQuantity =
-        error?.extensions.limitationReasons[0].quantityAllowed;
+      const stockQuantity = error?.extensions.limitationReasons[0].quantityAllowed;
     }
   }
 }

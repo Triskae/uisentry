@@ -5,7 +5,7 @@
     {
       "files": ["*.ts"],
       "extends": [
-        "plugin:@nx/angular",
+        "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
@@ -13,7 +13,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "app",
+            "prefix": "uis",
             "style": "camelCase"
           }
         ],
@@ -21,7 +21,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "app",
+            "prefix": "uis",
             "style": "kebab-case"
           }
         ]
@@ -29,8 +29,13 @@
     },
     {
       "files": ["*.html"],
-      "extends": ["plugin:@nx/angular-template"],
-      "rules": {}
+      "extends": [
+        "plugin:@angular-eslint/template/recommended",
+        "plugin:@angular-eslint/template/accessibility"
+      ],
+      "rules": {
+        "@angular-eslint/template/prefer-self-closing-tags": ["error"]
+      }
     }
   ]
 }
